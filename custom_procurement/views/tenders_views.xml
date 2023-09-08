@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="gntz_tenders_tree_view" model="ir.ui.view">
+        <field name="name">gntz.tenders.tree.view</field>
+        <field name="model">gntz.tenders</field>
+        <field name="arch" type="xml">
+            <tree string="Tenders">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="end_date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_gntz_tender_publish" model="ir.actions.server">
+        <field name="name">Publish Tender to Website</field>
+        <field name="model_id" ref="model_gntz_tenders"/>
+        <field name="state">code</field>
+        <field name="code">action = self.publish_to_website()</field>
+    </record>
+
+
+    <record id="gntz_tenders_form_view" model="ir.ui.view">
+        <field name="name">gntz.tenders.form.view</field>
+        <field name="model">gntz.tenders</field>
+        <field name="arch" type="xml">
+            <form>
+
+                <header>
+                    <button name="publish_to_website" string="Publish to Website" type="object" class="oe_highlight"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,submit,review,approve,closed,reject"/>
+                </header>
+                <sheet>
+                    <group>
+                        <div class="oe_title">
+                            <h3 string="Name">
+                                <group>
+                                    <field name="name"/>
+                                </group>
+                            </h3>
+                        </div>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="end_date"/>
+                        </group>
+                    </group>
+                    <group string="TOR Attachment (if any)">
+                        <field name="attachment" filename="attachment_name"/>
+                        <field name="attachment_name" invisible="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Tender Description">
+                            <field name="description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_gntz_tenders" model="ir.actions.act_window">
+        <field name="name">Tenders</field>
+        <field name="res_model">gntz.tenders</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Ready to create a Tender?
+            </p>
+            <p>
+                Let's create a Tender.
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem
+            parent="purchase.menu_procurement_management"
+            id="menu_gntz_tenders"
+            action="action_gntz_tenders"
+            sequence="6"
+            groups="custom_procurement.procurement_hod,custom_procurement.procurement_manager"/>
+
+</odoo>

@@ -1,0 +1,169 @@
+<odoo>
+
+    <record id="procurement_version_tree_view" model="ir.ui.view">
+        <field name="name">procurement.version.tree.view</field>
+        <field name="model">procurement.plan.version</field>
+        <field name="arch" type="xml">
+            <tree string="Procurement Version">
+                <field name="name"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="procurement_version_search_view" model="ir.ui.view">
+        <field name="name">procurement.version.search.view</field>
+        <field name="model">procurement.plan.version</field>
+        <field name="arch" type="xml">
+            <search string="procurement version search">
+                <field name="name" string="Version" filter_domain="[('name','ilike',self)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="procurement_version_form_view" model="ir.ui.view">
+        <field name="name">procurement.version.form.view</field>
+        <field name="model">procurement.plan.version</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="button_release" states="draft" string="Start Department Procument Planning"
+                            type="object" class="oe_highlight"
+                            groups="custom_procurement.procurement_manager"/>
+
+                    <button name="button_cancel" states="draft,released" string="Cancel" type="object"
+                            groups="procurement_plan.procurement_pc,procurement_plan.procurement_manager"/>
+                    <button name="button_reset" states="approved,advised,cancel,reject" string="Move Back To Draft"
+                            type="object"
+                            groups="procurement_plan.procurement_pc,procurement_plan.procurement_manager"/>
+                    <button name="button_close" states="released,approved" string="Close" type="object"
+                            groups="procurement_plan.procurement_pc,procurement_plan.procurement_manager"/>
+                    <button name="button_approve" states="advised" string="ES Approve" type="object"
+                            groups="procurement_plan.procurement_manager"/>
+                    <button name="button_advise" states="released" string="PC Recommend" type="object"
+                            groups="procurement_plan.procurement_pc,procurement_plan.procurement_manager"/>
+                    <button name="button_reject" states="released" string="Reject" type="object"
+                            groups="procurement_plan.procurement_pc,procurement_plan.procurement_manager"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,released,advised,approved,closed,reject,cancel"/>
+                </header>
+                <sheet>
+
+                    <div name="buttons" class="oe_right oe_button_box">
+                        <!--                        <button  class="oe_stat_button" name="attachment_tree_view" type="object" icon="fa-files-o">-->
+                        <!--                            <field string="Documents" name="doc_count" widget="statinfo"/>-->
+                        <!--                        </button>-->
+                        <button name="toggle_active" type="object"
+                                attrs="{'invisible': [('state','not in',['draft','cancel','closed','reject'])]}"
+                                class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="name"/>
+<!--                            <field name="department_id"/>-->
+                        </group>
+                        <group>
+                            <label for="date_from" string="Validity Period"/>
+                            <div>
+                                <field name="date_start" class="oe_inline" widget="date"/>
+                                -
+                                <field name="date_end" class="oe_inline" nolabel="1" widget="date"/>
+                            </div>
+                        </group>
+                    </group>
+
+
+                    <!--                    <group>-->
+                    <!--                        <separator string="Reject Reason" states="reject"/>-->
+                    <!--                        <newline/>-->
+                    <!--                        <field name="reject_reason" nolabel="1"/>-->
+                    <!--                    </group>-->
+                    <!--                    <group>-->
+                    <!--                        <separator string="Reject Reason" states="reject"/>-->
+                    <!--                        <newline/>-->
+                    <!--                        <field name="reject_reason" nolabel="1"/>-->
+                    <!--                    </group>-->
+
+                    <!--                    <notebook groups="procurement_plan.procurement_pc,procurement_plan.procurement_es">-->
+                    <!--                        <page string="Department Procurement Plans" attrs="{'invisible': [('state', 'in', ['submit','draft'])]}">-->
+                    <!--                            <field name="procurement_plan_ids" attrs="{'readonly': [('state', '=', 'approved')]}">-->
+                    <!--                                <tree>-->
+                    <!--                                    <field name="department_id"/>-->
+                    <!--                                    <field name="amount_total" />-->
+                    <!--                                    <field name="state" />-->
+                    <!--                                </tree>-->
+                    <!--                            </field>-->
+                    <!--                        </page>-->
+                    <!--                        <page string="Procurement Commitee Minutes" groups="procurement_plan.procurement_pc,procurement_plan.procurement_es" attrs="{'invisible': [('state', 'in', ['submit','draft'])]}">-->
+                    <!--                          <group string="Minutes">-->
+                    <!--                            <field name="pc_minutes"/>-->
+                    <!--                          </group>-->
+                    <!--                        </page>-->
+                    <!--                         <page string="Meetings Uploads">-->
+                    <!--                            <group string="Meeting Uploads">-->
+                    <!--                                <field name="documents_ids">-->
+                    <!--                                    <tree>-->
+                    <!--                                        <field name="name"/>-->
+                    <!--                                        <field name="document_type"/>-->
+                    <!--                                        <button name="export_file" string="Download" type="object" class="oe_highlight" />-->
+                    <!--                                    </tree>-->
+                    <!--                                </field>-->
+                    <!--                            </group>-->
+                    <!--                        </page>-->
+                    <!--                    </notebook>-->
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_procurement_version" model="ir.actions.act_window">
+        <field name="name">Procurement Version</field>
+        <field name="res_model">procurement.plan.version</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Ready to create a procurement version?
+            </p>
+            <p>
+                Let's create a procurement version.
+            </p>
+        </field>
+    </record>
+
+    <!-- Top menu item -->
+    <menuitem name="Procurement"
+              id="purchase.menu_purchase_root"
+              web_icon="purchase,static/description/icon.png"
+              sequence="25"/>
+
+    <!--                groups="purchase.group_purchase_manager,purchase.group_purchase_user"-->
+
+
+    <menuitem
+            id="menu_procurement_planning"
+            name="Annual Procurement Plan"
+            sequence="3"
+            parent="purchase.menu_purchase_root"
+    />
+
+    <!--            groups="procurement_plan.procurement_hod,procurement_plan.procurement_pc,procurement_plan.procurement_es"/>-->
+
+    <menuitem
+            parent="menu_procurement_planning"
+            id="menu_procurement_version"
+            action="action_procurement_version"
+            sequence="2"
+    />
+    <!--            groups="procurement_plan.procurement_pc,procurement_plan.procurement_es"-->
+</odoo>

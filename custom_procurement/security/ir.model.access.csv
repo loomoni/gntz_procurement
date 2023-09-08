@@ -1,0 +1,33 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_procurement_version_hod,Procurement Version HOD Group,model_procurement_plan_version,procurement_hod,1,1,0,0
+access_procurement_version_pc,Procurement Version PC Group,model_procurement_plan_version,procurement_pc,1,1,1,1
+access_procurement_version_es,Procurement Version ES Group,model_procurement_plan_version,procurement_manager,1,1,1,1
+
+access_procurement_plan_hod,Procurement Plan HOD Group,model_procurement_plan,procurement_hod,1,1,1,1
+access_procurement_plan_procurement,Procurement Plan PM Group,model_procurement_plan,procurement_manager,1,1,1,1
+access_procurement_plan_ad_manager,Procurement Plan AD Group,model_procurement_plan,procurement_ad_manager,1,1,1,1
+
+access_procurement_plan_line_hod,Procurement Plan line HOD  Group,model_procurement_plan_line,procurement_hod,1,1,1,1
+access_procurement_plan_line_procurement_manager,Procurement Plan line Procurement Manager Group,model_procurement_plan_line,procurement_manager,1,1,1,1
+access_procurement_plan_line_AD_manager,Procurement Plan line AD Manager  Group,model_procurement_plan_line,procurement_ad_manager,1,1,1,1
+
+access_procurement_work_plan_hod,Procurement work plan HOD  Group,model_work_plan,procurement_hod,1,1,1,1
+access_procurement_work_plan_procurement_manager,Procurement work plan Procurement Group,model_work_plan,procurement_manager,1,1,1,1
+access_procurement_work_plan_AD_manager,Procurement work plan AD  Group,model_work_plan,procurement_ad_manager,1,1,1,1
+
+access_procurement_purchase_requisition_hod,Procurement Purchase Requisition HOD  Group,model_requisition_purchase_purchase,procurement_hod,1,1,1,1
+access_procurement_purchase_requisition_procurement_manager,Procurement Purchase Requisition Procurement Group,model_requisition_purchase_purchase,procurement_manager,1,1,1,1
+access_procurement_purchase_requisition_ad_manager,Procurement Purchase Requisition AD Group,model_requisition_purchase_purchase,procurement_ad_manager,1,1,1,1
+
+access_procurement_purchase_requisition_line_hod,Procurement Purchase line Requisition HOD Group,model_purchase_requisition_line,procurement_hod,1,1,1,1
+access_procurement_purchase_requisition_line_procurement_manager,Procurement line Purchase Requisition procurement manager Group,model_purchase_requisition_line,procurement_manager,1,1,1,1
+access_procurement_purchase_requisition_line_ad_manager,Procurement Purchase line Requisition AD Group,model_purchase_requisition_line,procurement_ad_manager,1,1,1,1
+
+access_procurement_purchase_requisition_line_attachment_HOD,Procurement Purchase line Requisition attachment HOD Group,model_purchase_requisition_attachment_line,procurement_hod,1,1,1,1
+access_procurement_purchase_requisition_line_attachment_Procurement_manager,Procurement Purchase line Requisition attachment Procurement manager Group,model_purchase_requisition_attachment_line,procurement_manager,1,1,1,1
+access_procurement_purchase_requisition_line_attachment_ad_manager,Procurement Purchase line Requisition attachment AD Group,model_purchase_requisition_attachment_line,procurement_ad_manager,1,1,1,1
+
+access_procurement_gntz_tenders,Procurement gntz tenders Group,model_gntz_tenders,,1,1,1,1
+
+access_procurement_gntz_tenders_application,Procurement gntz tenders Applications Group,model_tenders_applicants,,1,1,1,1
+

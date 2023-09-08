@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="procurement_work_plan_tree_view" model="ir.ui.view">
+        <field name="name">work.plan.tree.view</field>
+        <field name="model">work.plan</field>
+        <field name="arch" type="xml">
+            <tree string="Work Plan">
+                <field name="subjected"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="procurement_plan_search_view" model="ir.ui.view">
+        <field name="name">procurement.plan.search.view</field>
+        <field name="model">work.plan</field>
+        <field name="arch" type="xml">
+            <search string="procurement plan search">
+                <field name="subjected" string="Subjected" filter_domain="[('subjected','ilike',self)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="procurement_work_plan_form_view" model="ir.ui.view">
+        <field name="name">procurement.plan.form.view</field>
+        <field name="model">work.plan</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="subjected"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="addressed_to"/>
+                    </group>
+                    <notebook>
+                        <page string="Address Letter">
+                            <field name="description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_procurement_work_plan" model="ir.actions.act_window">
+        <field name="name">Work Plans</field>
+        <field name="res_model">work.plan</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Ready to create a Work plan?
+            </p>
+            <p>
+                Let's create a Work plan.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            parent="purchase.menu_purchase_root"
+            id="menu_procurement_working_plan"
+            action="action_procurement_work_plan"
+            sequence="6"
+            groups="custom_procurement.procurement_hod,custom_procurement.procurement_manager"/>
+</odoo>

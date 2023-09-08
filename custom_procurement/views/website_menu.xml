@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="menu_tenders_list" model="website.menu">
+        <field name="name">Tenders</field>
+        <field name="url">/tenders</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence">11</field>
+    </record>
+</odoo>

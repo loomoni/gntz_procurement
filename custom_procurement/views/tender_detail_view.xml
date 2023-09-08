@@ -1,0 +1,53 @@
+<odoo>
+    <data>
+        <template id="website_tender_detail_template" name="Tender Detail">
+            <script type="text/javascript" src="/custom_procurement/static/src/js/website_tender_detail.js"></script>
+            <t t-call="website.layout">
+                <div class="container">
+                    <div class="row mt-4">
+                        <div class="col-md-8">
+                            <div class="tender-description">
+                                <h3 style="color: #333; font-size: 18px">
+                                    <t t-esc="doc.name"/>
+                                </h3>
+                                <div t-raw="doc.description"/>
+                                <!-- "Apply" button -->
+                                <a class="btn btn-primary" id="apply-button">Apply</a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="tender-details" style="border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); padding: 15px; padding-left: 0; background-color: #f5f5f5;">
+                                <h2>Details:</h2>
+                                <ul style="list-style-type: none;">
+                                    <li>
+                                        <strong>Open Date:</strong>
+                                        <t t-esc="doc.date"/>
+                                    </li>
+                                    <br/>
+                                    <li>
+                                        <strong>Close Date:</strong>
+                                        <t t-esc="doc.end_date"/>
+                                    </li>
+                                    <br/>
+                                    <br/>
+
+                                    <li>
+                                        <t t-if="doc.attachment">
+                                            <a t-att-href="'/web/content/' + str(doc.id) + '/attachment/' + doc.attachment_name"
+                                               class="btn btn-primary">
+                                                Download Attachment
+                                            </a>
+                                        </t>
+                                    </li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </t>
+        </template>
+    </data>
+</odoo>
