@@ -1,5 +1,3 @@
-import dp as dp
-
 from odoo import api, fields, models, _
 import time
 from datetime import datetime, date, time, timedelta

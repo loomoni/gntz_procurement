@@ -1,5 +1,3 @@
-import dp as dp
-
 from odoo import api, fields, models, _
 import time
 from datetime import datetime, date, time, timedelta
@@ -98,35 +96,3 @@ class ProcurementPlanLine(models.Model):
     def _compute_amount(self):
         for rec in self:
             rec.price_total = rec.price_unit * rec.product_qty
-
-
-
-
-
-
-    # product_tmpl_id = fields.Many2one('product.template', string='Product Template',
-    #                                   related='product_id.product_tmpl_id')
-    # name = fields.Char('Description', track_visibility='onchange')
-    # product_qty = fields.Float(string="Planned Quantity", required=True, track_visibility='onchange',
-    #                            digits=dp.get_precision('Product Unit of Measure'))
-    # product_uom_id = fields.Many2one('uom.uom', string='Unit of Measure', track_visibility='onchange',
-    #                                  domain="[('category_id', '=', category_uom_id)]")
-    # category_uom_id = fields.Many2one(related="product_uom_id.category_id")
-    # categ_id = fields.Many2one('product.category', 'Product Category')
-    #
-    # date_planned = fields.Datetime('Planned Delivery Date', required=True)
-    # is_editable = fields.Boolean('Is editable', compute="_compute_is_editable", readonly=True)
-    # # currency_id = fields.Many2one('res.currency', string='Currency', related='plan_id.currency_id')
-    # price_unit = fields.Float(string='Unit Price', required=True, digits=dp.get_precision('Product Price'))
-    #
-    # saving = fields.Float(string='Target Saving %', default="0.00", required=True)
-
-    # @api.multi
-    # @api.depends('product_id', 'name', 'product_qty', 'product_uom_id', 'date_planned', 'price_unit', 'saving')
-    # def _compute_is_editable(self):
-    #     for record in self:
-    #         if record.plan_id.state in ('draft'):
-    #             record.is_editable = True
-    #         else:
-    #             record.is_editable = False
-    #     return True
