@@ -26,6 +26,7 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,submit,review,approve"/>
                 </header>
                 <sheet>
                     <group>
@@ -34,6 +35,7 @@
                             <field name="subjected"/>
                         </group>
                         <group>
+                            <field name="department_id"/>
                             <field name="date"/>
                         </group>
                     </group>

@@ -32,22 +32,18 @@
                     <button name="button_release" states="draft" string="Start Department Procument Planning"
                             type="object" class="oe_highlight"
                             groups="custom_procurement.procurement_manager"/>
-
-                    <button name="button_cancel" states="draft,released" string="Cancel" type="object"
-                            groups="procurement_plan.procurement_pc,procurement_plan.procurement_manager"/>
-                    <button name="button_reset" states="approved,advised,cancel,reject" string="Move Back To Draft"
-                            type="object"
-                            groups="procurement_plan.procurement_pc,procurement_plan.procurement_manager"/>
-                    <button name="button_close" states="released,approved" string="Close" type="object"
-                            groups="procurement_plan.procurement_pc,procurement_plan.procurement_manager"/>
-                    <button name="button_approve" states="advised" string="ES Approve" type="object"
-                            groups="procurement_plan.procurement_manager"/>
-                    <button name="button_advise" states="released" string="PC Recommend" type="object"
-                            groups="procurement_plan.procurement_pc,procurement_plan.procurement_manager"/>
-                    <button name="button_reject" states="released" string="Reject" type="object"
-                            groups="procurement_plan.procurement_pc,procurement_plan.procurement_manager"/>
+                    <button name="button_procurement_review_version" class="oe_highlight" states="released,submit"
+                            string="Procurement Review" type="object"
+                            groups="custom_procurement.procurement_manager"/>
+                    <button name="button_ad_approve" states="review" string="Approve"
+                            type="object" class="oe_highlight"
+                            groups="custom_procurement.procurement_ad_manager"/>
+                    <button name="back_procurement" states="review" string="Back To Procurement" type="object"
+                            groups="custom_procurement.procurement_ad_manager"/>
+                    <button name="button_reject" states="review" string="Reject" type="object"
+                            groups="custom_procurement.procurement_ad_manager"/>
                     <field name="state" widget="statusbar"
-                           statusbar_visible="draft,released,advised,approved,closed,reject,cancel"/>
+                           statusbar_visible="draft,released,review,approve,reject"/>
                 </header>
                 <sheet>
 
@@ -65,7 +61,7 @@
                     <group>
                         <group>
                             <field name="name"/>
-<!--                            <field name="department_id"/>-->
+                            <!--                            <field name="department_id"/>-->
                         </group>
                         <group>
                             <label for="date_from" string="Validity Period"/>
@@ -76,6 +72,18 @@
                             </div>
                         </group>
                     </group>
+                    <notebook>
+                        <page string="Departmental Annual Plans">
+                            <field name="departmental_procurement_plan_line_ids">
+                                <tree editable="bottom">
+                                    <field name="requested"/>
+                                    <field name="department_id"/>
+                                    <field name="version_name"/>
+                                    <field name="amount"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
 
 
                     <!--                    <group>-->

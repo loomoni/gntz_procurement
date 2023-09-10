@@ -10,6 +10,7 @@ class PurchaseRequisition(models.Model):
     _name = "requisition.purchase.purchase"
     _description = "Purchase Requisition"
     _inherit = ['mail.thread', 'mail.activity.mixin']
+    _rec_name = "project_name"
 
     STATE_SELECTION = [
         ("draft", "Draft"),

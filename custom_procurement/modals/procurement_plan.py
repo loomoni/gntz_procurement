@@ -16,9 +16,9 @@ class ProcurementPlan(models.Model):
 
     STATE_SELECTION = [
         ("draft", "Draft"),
-        ("released", "Released"),
-        ("approved", "Approved"),
-        ("purchase", "Purchase"),
+        ("submit", "Submitted"),
+        ("approve", "Approved"),
+        ("purchase", "Purchased"),
         ("closed", "Closed"),
         ("reject", "Rejected"),
         ("cancel", "Cancelled"),
@@ -32,9 +32,40 @@ class ProcurementPlan(models.Model):
                 amount += line.price_total
             order.update({'amount_total': amount})
 
+    @api.multi
+    def button_submit(self):
+        self.write({'state': 'submit'})
+        return True
+
+    @api.multi
+    def button_procurement_approve(self):
+        self.write({'state': 'approve'})
+        procurement_data = self.env['procurement.plan.version.line']
+        for line in self:
+            procurement_data.create({
+                'requested': line.requested_by.id,
+                'version_id': line.version_id.id,
+                'department_id': line.department_id.id,
+                'amount': line.amount_total,
+                'version_name': line.version_name,
+            })
+        return True
+
+    @api.multi
+    def back_to_draft_procurement(self):
+        self.write({'state': 'draft'})
+        return True
+
+    @api.multi
+    def reject(self):
+        self.write({'state': 'reject'})
+        return True
+
+    name = fields.Char(string="Name")
     version_id = fields.Many2one('procurement.plan.version', string='Procurement Plan Version', readonly=True,
                                  required=True,
                                  states={'draft': [('readonly', False)]})
+    version_name = fields.Char(string="Plan Version", related='version_id.name')
     requested_by = fields.Many2one('res.users', 'Requested by', required=True, track_visibility='onchange',
                                    default=lambda self: self._uid,
                                    readonly=True, states={'draft': [('readonly', False)]})

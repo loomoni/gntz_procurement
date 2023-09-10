@@ -44,6 +44,7 @@
                     </group>
                     <group>
                         <group>
+                            <field name="tender_requisition_id"/>
                             <field name="date"/>
                         </group>
                         <group>

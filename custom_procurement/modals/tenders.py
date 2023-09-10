@@ -19,6 +19,7 @@ class GntzTenders(models.Model):
     ]
 
     name = fields.Char(string='Tender Name', states={'draft': [('readonly', False)]}, required=True)
+    tender_requisition_id = fields.Many2one(comodel_name="requisition.purchase.purchase", string='Purchase Requisition', required=True)
     date = fields.Date(string='Posted Date', default=fields.Date.today())
     end_date = fields.Date(string='End Submission Date')
     attachment = fields.Binary(string="TOR Attachment", attachment=True, store=True)
