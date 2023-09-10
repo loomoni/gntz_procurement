@@ -26,8 +26,8 @@
                 ],
 
     'data': [
-        'security/ir.model.access.csv',
         'security/security.xml',
+        'security/ir.model.access.csv',
         'views/procurement_version.xml',
         'views/procurement_plan.xml',
         'views/work_plan.xml',
