@@ -65,6 +65,8 @@
                                     <field name="name"/>
                                     <field name="email"/>
                                     <field name="phone"/>
+                                    <field name="attachment" filename="attachment_name"/>
+                                    <field name="attachment_name" invisible="1"/>
                                 </tree>
                             </field>
                         </page>

@@ -1,3 +1,5 @@
+import base64
+
 from addons.website.controllers.main import Website
 from odoo import http
 from odoo.http import request
@@ -35,19 +37,39 @@ class TenderApplicationController(http.Controller):
         email = post.get('email')
         company = post.get('company')
         phone = post.get('phone')
-        # attachment = post.get('attachment')
+        # attachment = post.get('attachment_name')
+
+        # Handle file attachment
+        attachment = request.httprequest.files.get('attachment')
+        attachment_name = attachment.filename if attachment else None
+        # Save the attachment and other data to your model (tenders.applicants)
+        if attachment:
+            # You can save the attachment using the fields.Binary method.
+            # Example:
+            attachment_data = base64.b64encode(attachment.read())
+            applicants_model = request.env['tenders.applicants']
+            applicants_model.create({
+                'name': name,
+                'email': email,
+                'phone': phone,
+                'company': company,
+                'tender_id': tender_id,
+                'attachment': attachment_data,
+                'attachment_name': attachment_name,
+            })
+
 
         # Save data to the 'tenders.applicants' model
-        applicants_model = request.env['tenders.applicants']
-        applicants_model.create({
-            'tender_id': int(tender_id),
-            'name': name,
-            'email': email,
-            'phone': phone,
-            'company': company,
-            # 'attachment': attachment,
-            # Other fields as needed
-        })
+        # applicants_model = request.env['tenders.applicants']
+        # applicants_model.create({
+        #     'tender_id': int(tender_id),
+        #     'name': name,
+        #     'email': email,
+        #     'phone': phone,
+        #     'company': company,
+        #     'attachment': attachment,
+        #     # Other fields as needed
+        # })
 
         # Redirect to a success page or provide feedback to the user
         return http.request.redirect('/application_success')
