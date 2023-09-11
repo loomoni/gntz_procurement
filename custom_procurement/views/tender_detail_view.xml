@@ -11,12 +11,13 @@
                                     <t t-esc="doc.name"/>
                                 </h3>
                                 <div t-raw="doc.description"/>
-                                <!-- "Apply" button -->
-                                <!--                                <a class="btn btn-primary" id="apply-button">Apply</a>-->
-                                <!--                                <a t-attf-href="apply-tender?doc_id= + doc.id" style="align: center" class="btn btn-primary">Apply</a>-->
-                                <a t-attf-href="/apply-tender?doc_id={{doc.id}}" style="text-align: center"
-                                   class="btn btn-primary">Apply
-                                </a>
+
+                                <div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
+                                    <a t-attf-href="/apply-tender?doc_id={{doc.id}}" class="btn btn-primary"
+                                       style="padding: 10px 20px; font-size: 16px;">
+                                        Click to Apply
+                                    </a>
+                                </div>
 
                             </div>
                         </div>
@@ -39,9 +40,10 @@
 
                                     <li>
                                         <t t-if="doc.attachment">
-                                            <a t-att-href="'/web/content/' + str(doc.id) + '/attachment/' + doc.attachment_name"
-                                               class="btn btn-primary">
-                                                Download Attachment
+                                            <a t-att-href="'/web/content/gntz.tenders/' + str(doc.id) + '/attachment/' + doc.attachment_name + '?download=true'">
+                                                <button class="btn btn-primary">
+                                                    Download Attachment
+                                                </button>
                                             </a>
                                         </t>
                                     </li>

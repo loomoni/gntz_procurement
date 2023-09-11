@@ -10,16 +10,37 @@ class GntzTenders(models.Model):
     STATE_SELECTION = [
         ("draft", "Draft"),
         ("submit", "Submitted"),
-        ("review", "Reviewed"),
-        ("approve", "Approved"),
-        ("publish", "Published"),
+        ("review", "Line Manager Reviewed"),
+        ("verify", "Procurement Approve"),
+        ("publish", "AD Approved $ Published"),
         ("closed", "Closed"),
         ("reject", "Rejected"),
         ("cancel", "Cancelled"),
     ]
 
+    @api.multi
+    def btn_submit(self):
+        self.write({'state': 'submit'})
+        return True
+
+    @api.multi
+    def btn_line_manager_review(self):
+        self.write({'state': 'review'})
+        return True
+
+    @api.multi
+    def btn_procurement_verify(self):
+        self.write({'state': 'verify'})
+        return True
+
+    @api.multi
+    def btn_approve_and_publish_to_website(self):
+        self.write({'state': 'publish'})
+        return True
+
     name = fields.Char(string='Tender Name', states={'draft': [('readonly', False)]}, required=True)
-    tender_requisition_id = fields.Many2one(comodel_name="requisition.purchase.purchase", string='Purchase Requisition', required=True)
+    tender_requisition_id = fields.Many2one(comodel_name="requisition.purchase.purchase", string='Purchase Requisition',
+                                            required=True)
     date = fields.Date(string='Posted Date', default=fields.Date.today())
     end_date = fields.Date(string='End Submission Date')
     attachment = fields.Binary(string="TOR Attachment", attachment=True, store=True)
@@ -28,11 +49,6 @@ class GntzTenders(models.Model):
                              default='draft')
     description = fields.Html(string='Tender Description')
     bidders_line_ids = fields.One2many(comodel_name="tenders.applicants", inverse_name="tender_id", string="Bidders ID")
-
-    @api.multi
-    def publish_to_website(self):
-        self.write({'state': 'publish'})
-        return True
 
 
 class TendersApplicants(models.Model):

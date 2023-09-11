@@ -4,7 +4,7 @@
         <t t-call="website.layout">
             <div class="container">
                 <div class="row mt-4">
-                    <div class="col-md-6 offset-md-3">
+                    <div class="col-md-6 offset-md-3" style="margin-bottom: 20px;">
                         <form method="post" action="/submit_application" enctype="multipart/form-data"
                               class="rounded p-4" style="background-color: #f8f9fa;">
                             <h2 class="text-center mb-4" style="color: #333;">Apply for Tender</h2>

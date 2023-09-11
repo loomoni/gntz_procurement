@@ -28,9 +28,12 @@
             <form>
 
                 <header>
-                    <button name="publish_to_website" string="Publish to Website" type="object" class="oe_highlight"/>
+                    <button name="btn_submit" string="Submit Tender" states="draft" type="object" class="oe_highlight"/>
+                    <button name="btn_line_manager_review" string="Review" states="submit" type="object" class="oe_highlight"/>
+                    <button name="btn_procurement_verify" string="Verify" states="review" type="object" class="oe_highlight"/>
+                    <button name="btn_approve_and_publish_to_website" states="verify" string="Approve $ Publish to Website" type="object" class="oe_highlight"/>
                     <field name="state" widget="statusbar"
-                           statusbar_visible="draft,submit,review,approve,closed,reject"/>
+                           statusbar_visible="draft,submit,review,verify,approve,closed,reject"/>
                 </header>
                 <sheet>
                     <group>

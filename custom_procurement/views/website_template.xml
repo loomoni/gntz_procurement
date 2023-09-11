@@ -15,7 +15,7 @@
                                 </a>
                             </h2>
                             <p style="font-size: 16px; color: #777;">
-                                <i class="fa fa-clock-o">Open Date:
+                                <i class="fa fa-clock-o"> Open Date:
                                     <t t-esc="doc.date"/>
                                     - Close Date:
                                     <t t-esc="doc.end_date"/>
