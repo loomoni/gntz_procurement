@@ -27,6 +27,7 @@ class GntzTenders(models.Model):
     state = fields.Selection(STATE_SELECTION, index=True, track_visibility='onchange', required=True, copy=False,
                              default='draft')
     description = fields.Html(string='Tender Description')
+    bidders_line_ids = fields.One2many(comodel_name="tenders.applicants", inverse_name="tender_id", string="Bidders ID")
 
     @api.multi
     def publish_to_website(self):
@@ -39,7 +40,8 @@ class TendersApplicants(models.Model):
     _description = "tenders applicants"
 
     name = fields.Char(string='Applicant Name')
-    email = fields.Date(string='Email')
-    phone = fields.Date(string='Phone')
+    email = fields.Char(string='Email')
+    phone = fields.Char(string='Phone')
     attachment = fields.Binary(string="TOR Attachment", attachment=True, store=True)
     attachment_name = fields.Char('Attachment')
+    tender_id = fields.Many2one(comodel_name="gntz.tenders", string="Subject")

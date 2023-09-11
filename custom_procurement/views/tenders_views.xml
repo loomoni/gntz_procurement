@@ -59,6 +59,15 @@
                         <page string="Tender Description">
                             <field name="description"/>
                         </page>
+                        <page string="Bidders">
+                            <field name="bidders_line_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="email"/>
+                                    <field name="phone"/>
+                                </tree>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">

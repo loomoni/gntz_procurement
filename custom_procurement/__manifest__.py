@@ -36,6 +36,7 @@
         'views/tenders_views.xml',
         'views/website_template.xml',
         'views/tender_detail_view.xml',
+        'views/application_form_template.xml',
     ],
     'js': [
             'static/src/js/website_tender_detail.js',  # Include your JS file here
