@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <tree string="Work Plan">
                 <field name="subjected"/>
+                <field name="state"/>
             </tree>
         </field>
     </record>
@@ -26,6 +27,12 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <button name="btn_user_submit" string="Submit" states="draft" type="object" class="oe_highlight" groups="custom_procurement.procurement_staff"/>
+                    <button name="btn_line_manager_review" string="Review" states="submit" type="object" class="oe_highlight" groups="custom_procurement.procurement_hod"/>
+                    <button name="btn_back_draft" string="Back to Draft" states="submit" type="object" groups="custom_procurement.procurement_hod"/>
+                    <button name="btn_ad_approve" string="Approve" states="review" type="object" class="oe_highlight" groups="custom_procurement.procurement_ad_manager"/>
+                    <button name="btn_back_line_manager" string="Move to Line Manager" states="review" type="object" groups="custom_procurement.procurement_ad_manager"/>
+                    <button name="btn_reject" string="Reject" states="submit,review" type="object" class="oe_highlight" groups="custom_procurement.procurement_ad_manager,custom_procurement.procurement_hod"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,submit,review,approve"/>
                 </header>
                 <sheet>
