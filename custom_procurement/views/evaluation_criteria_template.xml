@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="evaluation_criteria_template_tree_view" model="ir.ui.view">
+        <field name="name">evaluation.criteria.template.tree.view</field>
+        <field name="model">evaluation.criteria.template</field>
+        <field name="arch" type="xml">
+            <tree string="Evaluation Criteria Template">
+                <field name="name"/>
+                <field name="type"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="evaluation_criteria_template_form_view" model="ir.ui.view">
+        <field name="name">evaluation.criteria.template.form.view</field>
+        <field name="model">evaluation.criteria.template</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Template Name">
+                        <field name="name"/>
+                        <field name="type"/>
+                    </group>
+                    <notebook>
+                        <page string="Evaluation Criteria">
+                            <field name="lines_ids">
+                                <tree>
+                                    <field name="criteria"/>
+                                    <field name="type"/>
+                                    <field name="expected_remarks"/>
+                                    <field name="maximum_score"/>
+                                </tree>
+<!--                                <form>-->
+<!--                                    <field name="criteria"/>-->
+<!--                                    <field name="type"/>-->
+<!--                                    <field name="expected_remarks"/>-->
+<!--                                    <field name="maximum_score"/>-->
+<!--                                </form>-->
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+        <record id="evaluation_criteria_template_action_id" model="ir.actions.act_window">
+        <field name="name">Evaluation Criteria Template</field>
+        <field name="res_model">evaluation.criteria.template</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Ready to create a Evaluation Criteria Template?
+            </p>
+            <p>
+                Let's create a Evaluation Criteria Template.
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem
+            parent="purchase.menu_purchase_root"
+            id="menu_evaluation_criteria_template_id"
+            action="evaluation_criteria_template_action_id"
+            sequence="12"
+            groups="custom_procurement.procurement_hod,custom_procurement.procurement_manager"/>
+</odoo>

@@ -33,3 +33,11 @@ access_procurement_gntz_tenders_application,Procurement gntz tenders Application
 
 access_procurement_plan_version_line,Procurement gntz procurement plan version line Group,model_procurement_plan_version_line,,1,1,1,1
 
+access_tenders_opening_committee,Procurement gntz tenders opening committee Group,model_tenders_opening_committee,,1,1,1,1
+
+access_evaluation_criteria_template,Procurement gntz evaluation criteria template Group,model_evaluation_criteria_template,,1,1,1,1
+
+access_evaluation_criteria_template_line,Procurement gntz evaluation criteria template Line Group,model_evaluation_criteria_template_line,,1,1,1,1
+
+access_tender_evaluation_criteria_line,Procurement gntz tender evaluation criteria line Group,model_tender_evaluation_criteria_line,,1,1,1,1
+
