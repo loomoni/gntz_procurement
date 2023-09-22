@@ -1,4 +1,5 @@
 from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 from odoo.fields import Date
 
 
@@ -13,10 +14,12 @@ class GntzTenders(models.Model):
         ("submit", "Submitted"),
         ("review", "Line Manager Reviewed"),
         ("verify", "Procurement Approve"),
-        ("publish", "AD Approved $ Published"),
-        ("closed", "Closed"),
-        ("reject", "Rejected"),
-        ("cancel", "Cancelled"),
+        ("Published", "AD Approved $ Published"),
+        ("Bid Evaluation", "Committee Approved"),
+        ("Contract Awarded", "Contract Awarded"),
+        ("Closed", "Closed"),
+        ("Rejected", "Rejected"),
+        ("Canceled", "Cancelled"),
     ]
 
     @api.multi
@@ -36,14 +39,31 @@ class GntzTenders(models.Model):
 
     @api.multi
     def btn_approve_and_publish_to_website(self):
-        self.write({'state': 'publish'})
+        self.write({'state': 'Published'})
+        return True
+
+    @api.multi
+    def committee_approved(self):
+        # check if you have at least three commit members
+        if len(self.tender_opening_committee_line_ids) >= 3:
+            self.write({'state': 'Bid Evaluation'})
+            return True
+        else:
+            raise ValidationError('You need at least 3 committee members to be Approved')
+
+    @api.multi
+    def contract_awarded(self):
+        self.write({'state': 'Contract Awarded'})
         return True
 
     name = fields.Char(string='Tender Name', states={'draft': [('readonly', False)]}, required=True)
+    tender_number = fields.Char(string='Tender Number', states={'draft': [('readonly', False)]},)
     tender_requisition_id = fields.Many2one(comodel_name="requisition.purchase.purchase", string='Purchase Requisition',
                                             required=True)
     date = fields.Date(string='Posted Date', default=fields.Date.today())
     end_date = fields.Date(string='End Submission Date')
+    type = fields.Selection([('Goods', 'Goods'), ('Services', 'Services'), ('Works', 'Work')], string="Tender Type",
+                            required=True)
     attachment = fields.Binary(string="TOR Attachment", attachment=True, store=True)
     attachment_name = fields.Char('Attachment')
     state = fields.Selection(STATE_SELECTION, index=True, track_visibility='onchange', required=True, copy=False,
@@ -52,6 +72,7 @@ class GntzTenders(models.Model):
     bidders_line_ids = fields.One2many(comodel_name="tenders.applicants", inverse_name="tender_id", string="Bidders ID")
     tender_opening_committee_line_ids = fields.One2many(comodel_name="tenders.opening.committee",
                                                         inverse_name="tender_committee_id", string="Tender Committee")
+
     evaluation_lines_ids = fields.One2many(comodel_name="tender.evaluation.criteria.line",
                                            inverse_name="evaluation_criteria_id", string="Evaluation Criteria Template")
 

@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <tree string="Tenders">
                 <field name="name"/>
+                <field name="tender_number"/>
                 <field name="date"/>
                 <field name="end_date"/>
                 <field name="state"/>
@@ -29,9 +30,16 @@
 
                 <header>
                     <button name="btn_submit" string="Submit Tender" states="draft" type="object" class="oe_highlight"/>
-                    <button name="btn_line_manager_review" string="Review" states="submit" type="object" class="oe_highlight"/>
-                    <button name="btn_procurement_verify" string="Verify" states="review" type="object" class="oe_highlight"/>
-                    <button name="btn_approve_and_publish_to_website" states="verify" string="Approve $ Publish to Website" type="object" class="oe_highlight"/>
+                    <button name="btn_line_manager_review" string="Review" states="submit" type="object"
+                            class="oe_highlight"/>
+                    <button name="btn_procurement_verify" string="Verify" states="review" type="object"
+                            class="oe_highlight"/>
+                    <button name="btn_approve_and_publish_to_website" states="verify"
+                            string="Approve $ Publish to Website" type="object" class="oe_highlight"/>
+                    <button name="committee_approved" states="Published" string="Approve Committee" type="object"
+                            class="oe_highlight"/>
+                    <button name="contract_awarded" states="Bid Evaluation" string="Contract Awarded" type="object"
+                            class="oe_highlight"/>
                     <field name="state" widget="statusbar"
                            statusbar_visible="draft,submit,review,verify,approve,closed,reject"/>
                 </header>
@@ -49,9 +57,11 @@
                         <group>
                             <field name="tender_requisition_id" domain="[('state', '=', 'tender')]"
                                    options="{'no_create': True, 'no_edit': True}"/>
-                            <field name="date"/>
+                            <field name="tender_number"/>
+                            <field name="type"/>
                         </group>
                         <group>
+                            <field name="date"/>
                             <field name="end_date"/>
                         </group>
                     </group>
@@ -80,7 +90,7 @@
                                     <field name="name"/>
                                     <field name="date"/>
                                     <field name="position"/>
-<!--                                    <field name="tender_committee_id" />-->
+                                    <!--                                    <field name="tender_committee_id" />-->
                                 </tree>
                             </field>
                         </page>
