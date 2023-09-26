@@ -11,7 +11,7 @@ from odoo.tools import datetime
 
 
 class CustomHomeWebsite(http.Controller):
-    @http.route('/home', type='http', auth="public", website=True)
+    @http.route('/', type='http', auth="public", website=True)
     def custom_home_page(self, **kw):
         today_date = datetime.now().date()
         open_tenders = http.request.env['gntz.tenders'].search(
