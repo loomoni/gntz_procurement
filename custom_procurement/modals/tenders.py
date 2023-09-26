@@ -61,8 +61,9 @@ class GntzTenders(models.Model):
                                             required=True)
     date = fields.Date(string='Posted Date', default=fields.Date.today())
     end_date = fields.Date(string='End Submission Date')
-    type = fields.Selection([('Goods', 'Goods'), ('Services', 'Services'), ('Works', 'Work')], string="Tender Type",
+    tender_type = fields.Selection([('Goods', 'Goods'), ('Services', 'Services'), ('Works', 'Works')], string="Tender Type",
                             required=True)
+    branch = fields.Many2one(comodel_name="hr.branches", string="Branch", store=True)
     attachment = fields.Binary(string="TOR Attachment", attachment=True, store=True)
     attachment_name = fields.Char('Attachment')
     state = fields.Selection(STATE_SELECTION, index=True, track_visibility='onchange', required=True, copy=False,
@@ -83,8 +84,22 @@ class TendersApplicants(models.Model):
     name = fields.Char(string='Applicant Name')
     email = fields.Char(string='Email')
     phone = fields.Char(string='Phone')
-    attachment = fields.Binary(string="TOR Attachment", attachment=True, store=True)
-    attachment_name = fields.Char('Attachment')
+
+    attachment = fields.Binary(string="Company Profile", attachment=True, store=True)
+    attachment_name = fields.Char('Company Profile Attachment')
+
+    business_licence_attachment = fields.Binary(string="Business Licence", attachment=True, store=True)
+    business_licence_attachment_name = fields.Char('Business Licence Attachment')
+
+    tin_registration_attachment = fields.Binary(string="TIN & Certificate of registration", attachment=True, store=True)
+    tin_registration_attachment_name = fields.Char('TIN & Certificate of registration Attachment')
+
+    technical_proposal = fields.Binary(string="Technical Proposal", attachment=True, store=True)
+    technical_proposal_name = fields.Char('Technical Proposal Attachment')
+
+    financial_proposal = fields.Binary(string="Financial Proposal", attachment=True, store=True)
+    financial_proposal_name = fields.Char('Financial Proposal Attachment')
+
     tender_id = fields.Many2one(comodel_name="gntz.tenders", string="Subject")
 
 

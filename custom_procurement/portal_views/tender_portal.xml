@@ -12,38 +12,37 @@
                     </p>
                 </div>
 
+                <form action="/all/tenders" method="get">
+                    <!-- Search Section -->
+                    <div class="search-section"
+                         style="margin-bottom: 15px; display: flex; flex-direction: row;  justify-content: flex-end; align-items: center;">
 
-                <!-- Search Section -->
-                <div class="search-section"
-                     style="margin-bottom: 15px; display: flex; flex-direction: row;  justify-content: flex-end; align-items: center;">
+                        <!-- Tender Type Search Bar -->
+                        <div class="search-bar" style="margin-right: 10px; ">
+                            <select id="tender_type" name="tender_type"
+                                    style="padding: 8px; width: 300px;  background-color: white; border: 1px solid #ccc; border-radius: 5px;">
+                                <option value="">Select Tender Type</option>
+                                <option value="Works">Works</option>
+                                <option value="Goods">Goods</option>
+                                <option value="Services">Services</option>
+                            </select>
+                        </div>
 
-                    <!-- Tender Type Search Bar -->
-                    <div class="search-bar" style="margin-right: 10px; ">
-                        <select id="tender_type" name="tender_type"
-                                style="padding: 8px; width: 300px;  background-color: white; border: 1px solid #ccc; border-radius: 5px;">
-                            <option value="">Select Tender Type</option>
-                            <option value="work">Work</option>
-                            <option value="goods">Goods</option>
-                            <option value="services">Services</option>
-                        </select>
+                        <div class="search-bar" style="margin-right: 10px;">
+                            <select id="branch" name="branch"
+                                    style="padding: 8px; width: 300px; background-color: white; border: 1px solid #ccc; border-radius: 5px;">
+                                <option value="">Select Branch</option>
+                                <t t-foreach="branches" t-as="branch">
+                                    <option t-att-value="branch.id">
+                                        <t t-esc="branch.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                        <!-- Apply Button -->
+                        <button class="btn btn-primary" type="submit">Apply Filters</button>
                     </div>
-
-                    <!-- Tender Branch Search Bar -->
-                    <div class="search-bar" style="margin-right: 10px;">
-                        <select id="branch" name="branch"
-                                style="padding: 8px; width: 300px;  background-color: white; border: 1px solid #ccc; border-radius: 5px;">
-                            <option value="">Select Branch</option>
-                            <t t-foreach="branches" t-as="branch">
-                                <option value="t t-esc='branch.id'">
-                                    <t t-esc="branch.name"/>
-                                </option>
-                            </t>
-                        </select>
-                    </div>
-
-                    <!-- Apply Button -->
-                    <button class="btn btn-primary" type="submit">Apply Filters</button>
-                </div>
+                </form>
 
                 <table style="width: 100%; border-collapse: collapse;">
                     <thead style="height: 20px">
@@ -107,36 +106,37 @@
                 </div>
 
                 <!-- Search Section -->
-                <div class="search-section"
-                     style="margin-bottom: 15px; display: flex; flex-direction: row;  justify-content: flex-end; align-items: center;">
+                <form action="/open/tenders" method="get">
+                    <!-- Search Section -->
+                    <div class="search-section"
+                         style="margin-bottom: 15px; display: flex; flex-direction: row;  justify-content: flex-end; align-items: center;">
 
-                    <!-- Tender Type Search Bar -->
-                    <div class="search-bar" style="margin-right: 10px; ">
-                        <select id="tender_type" name="tender_type"
-                                style="padding: 8px; width: 300px;  background-color: white; border: 1px solid #ccc; border-radius: 5px;">
-                            <option value="">Select Tender Type</option>
-                            <option value="work">Work</option>
-                            <option value="goods">Goods</option>
-                            <option value="services">Services</option>
-                        </select>
+                        <!-- Tender Type Search Bar -->
+                        <div class="search-bar" style="margin-right: 10px; ">
+                            <select id="tender_type" name="tender_type"
+                                    style="padding: 8px; width: 300px;  background-color: white; border: 1px solid #ccc; border-radius: 5px;">
+                                <option value="">Select Tender Type</option>
+                                <option value="Works">Works</option>
+                                <option value="Goods">Goods</option>
+                                <option value="Services">Services</option>
+                            </select>
+                        </div>
+
+                        <div class="search-bar" style="margin-right: 10px;">
+                            <select id="branch" name="branch"
+                                    style="padding: 8px; width: 300px; background-color: white; border: 1px solid #ccc; border-radius: 5px;">
+                                <option value="">Select Branch</option>
+                                <t t-foreach="branches" t-as="branch">
+                                    <option t-att-value="branch.id">
+                                        <t t-esc="branch.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                        <!-- Apply Button -->
+                        <button class="btn btn-primary" type="submit">Apply Filters</button>
                     </div>
-
-                    <!-- Tender Branch Search Bar -->
-                    <div class="search-bar" style="margin-right: 10px;">
-                        <select id="branch" name="branch"
-                                style="padding: 8px; width: 300px;  background-color: white; border: 1px solid #ccc; border-radius: 5px;">
-                            <option value="">Select Branch</option>
-                            <t t-foreach="branches" t-as="branch">
-                                <option value="t t-esc='branch.id'">
-                                    <t t-esc="branch.name"/>
-                                </option>
-                            </t>
-                        </select>
-                    </div>
-
-                    <!-- Apply Button -->
-                    <button class="btn btn-primary" type="submit">Apply Filters</button>
-                </div>
+                </form>
 
                 <table style="width: 100%; border-collapse: collapse;">
                     <thead style="height: 20px">
@@ -198,37 +198,38 @@
                     </p>
                 </div>
 
-                <!-- Search Section -->
-                <div class="search-section"
-                     style="margin-bottom: 15px; display: flex; flex-direction: row;  justify-content: flex-end; align-items: center;">
+                <!-- Search Form-->
+                <form action="/awarded/tenders" method="get">
+                    <!-- Search Section -->
+                    <div class="search-section"
+                         style="margin-bottom: 15px; display: flex; flex-direction: row;  justify-content: flex-end; align-items: center;">
 
-                    <!-- Tender Type Search Bar -->
-                    <div class="search-bar" style="margin-right: 10px; ">
-                        <select id="tender_type" name="tender_type"
-                                style="padding: 8px; width: 300px;  background-color: white; border: 1px solid #ccc; border-radius: 5px;">
-                            <option value="">Select Tender Type</option>
-                            <option value="work">Work</option>
-                            <option value="goods">Goods</option>
-                            <option value="services">Services</option>
-                        </select>
+                        <!-- Tender Type Search Bar -->
+                        <div class="search-bar" style="margin-right: 10px; ">
+                            <select id="tender_type" name="tender_type"
+                                    style="padding: 8px; width: 300px;  background-color: white; border: 1px solid #ccc; border-radius: 5px;">
+                                <option value="">Select Tender Type</option>
+                                <option value="Works">Works</option>
+                                <option value="Goods">Goods</option>
+                                <option value="Services">Services</option>
+                            </select>
+                        </div>
+
+                        <div class="search-bar" style="margin-right: 10px;">
+                            <select id="branch" name="branch"
+                                    style="padding: 8px; width: 300px; background-color: white; border: 1px solid #ccc; border-radius: 5px;">
+                                <option value="">Select Branch</option>
+                                <t t-foreach="branches" t-as="branch">
+                                    <option t-att-value="branch.id">
+                                        <t t-esc="branch.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                        <!-- Apply Button -->
+                        <button class="btn btn-primary" type="submit">Apply Filters</button>
                     </div>
-
-                    <!-- Tender Branch Search Bar -->
-                    <div class="search-bar" style="margin-right: 10px;">
-                        <select id="branch" name="branch"
-                                style="padding: 8px; width: 300px;  background-color: white; border: 1px solid #ccc; border-radius: 5px;">
-                            <option value="">Select Branch</option>
-                            <t t-foreach="branches" t-as="branch">
-                                <option value="t t-esc='branch.id'">
-                                    <t t-esc="branch.name"/>
-                                </option>
-                            </t>
-                        </select>
-                    </div>
-
-                    <!-- Apply Button -->
-                    <button class="btn btn-primary" type="submit">Apply Filters</button>
-                </div>
+                </form>
 
                 <table style="width: 100%; border-collapse: collapse;">
                     <thead style="height: 20px">
