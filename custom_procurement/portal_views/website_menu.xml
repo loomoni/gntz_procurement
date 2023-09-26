@@ -1,18 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-<!--    <record id="menu_home_id" model="website.menu">-->
-<!--        <field name="name">Home</field>-->
-<!--        <field name="url">/</field>-->
-<!--        <field name="parent_id" ref="website.main_menu"/>-->
-<!--        <field name="sequence">1</field>-->
-<!--    </record>-->
+        <record id="menu_registration_main" model="website.menu">
+        <field name="name">Register</field>
+        <field name="url">/register</field>
+        <field name="parent_id" search="[('parent_id', '=', False), ('website_id', '=', 1)]"/>
+        <field name="sequence" type="int">12</field>
+        <field name="website_id" ref="website.default_website"/>
+    </record>
 
-    <record id="menu_tenders_list" model="website.menu">
+    <record id="menu_tenders_main" model="website.menu">
         <field name="name">Tenders</field>
-        <field name="url">/tenders</field>
-        <field name="parent_id" ref="website.main_menu"/>
-        <field name="sequence">11</field>
+        <field name="url"></field>
+        <field name="parent_id" search="[('parent_id', '=', False), ('website_id', '=', 1)]"/>
+        <field name="sequence" type="int">10</field>
+        <field name="website_id" ref="website.default_website"/>
+    </record>
+
+    <record id="menu_all_tenders" model="website.menu">
+        <field name="name">All Tenders</field>
+        <field name="url">/all/tenders</field>
+        <field name="parent_id" ref="custom_procurement.menu_tenders_main"/>
+        <field name="sequence" type="int">1</field>
+        <field name="website_id" ref="website.default_website"/>
+    </record>
+
+    <record id="menu_open_tenders" model="website.menu">
+        <field name="name">Open Tenders</field>
+        <field name="url">/open/tenders</field>
+        <field name="parent_id" ref="custom_procurement.menu_tenders_main"/>
+        <field name="sequence" type="int">2</field>
+        <field name="website_id" ref="website.default_website"/>
+    </record>
+
+    <record id="menu_awarded_tenders" model="website.menu">
+        <field name="name">Awarded Tenders</field>
+        <field name="url">/awarded/tenders</field>
+        <field name="parent_id" ref="custom_procurement.menu_tenders_main"/>
+        <field name="sequence" type="int">3</field>
+        <field name="website_id" ref="website.default_website"/>
     </record>
 
 </odoo>
+

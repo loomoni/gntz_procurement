@@ -7,7 +7,6 @@ class GntzTenders(models.Model):
     _name = "gntz.tenders"
     _description = "Gntz Tenders"
     _inherit = ['mail.thread', 'mail.activity.mixin']
-    _rec_name = "date"
 
     STATE_SELECTION = [
         ("draft", "Draft"),

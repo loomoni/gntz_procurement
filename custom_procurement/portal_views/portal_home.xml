@@ -34,7 +34,7 @@
                                                 <a href="/aboutus" class="btn btn-secondary flat" data-original-title=""
                                                    title="" aria-describedby="tooltip777932">become a supplier
                                                 </a>
-                                                <a href="/contactus" class="btn btn-primary flat" data-original-title=""
+                                                <a href="/open/tenders" class="btn btn-primary flat" data-original-title=""
                                                    title="">Open tenders
                                                 </a>
                                             </div>
@@ -190,7 +190,8 @@
                                                              onmouseout="this.style.backgroundColor='white';">
 
                                                             <a style="color: #337ab7;"
-                                                               t-att-href="'/page/tenders/' + str(1)">
+                                                               t-att-href="'/tenders/' + str(doc.id)">
+
                                                                 <div class="o_default_snippet_text"
                                                                      style="font-size: 20px; margin-bottom: 5px;">
                                                                     <t t-esc="doc.name"/>
@@ -227,7 +228,7 @@
                                                          onmouseout="this.style.backgroundColor='white';">
 
                                                         <a style="color: #337ab7;"
-                                                           t-att-href="'/page/tenders/' + str(1)">
+                                                           t-att-href="'/tenders/' + str(doc.id)">
                                                             <div class="o_default_snippet_text"
                                                                  style="font-size: 20px; margin-bottom: 5px;">
                                                                 <t t-esc="doc.name"/>
@@ -262,17 +263,15 @@
                                                          onmouseout="this.style.backgroundColor='white';">
 
                                                         <a style="color: #337ab7;"
-                                                           t-att-href="'/page/tenders/' + str(1)">
+                                                           t-att-href="'/tenders/' + str(doc.id)">
                                                             <div class="o_default_snippet_text"
                                                                  style="font-size: 20px; margin-bottom: 5px;">
                                                                 <t t-esc="doc.name"/>
                                                             </div>
                                                         </a>
-
-                                                        <p style="font-size: 16px; margin: 0; color: #666;">Tender
-                                                            Date:
-                                                            <t t-esc="doc.date"/>
-                                                            - Closing Date:
+                                                        <p style="font-size: 15px; margin: 0; color: #666;">Awarded To:
+                                                            ROKI HOLDINGS LIMITED
+                                                            - Award Date:
                                                             <t t-esc="doc.end_date"/>
                                                         </p>
 

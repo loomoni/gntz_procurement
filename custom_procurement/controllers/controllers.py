@@ -1,9 +1,13 @@
 import base64
 
+from addons.auth_signup.controllers.main import AuthSignupHome
 from addons.website.controllers.main import Website
 from odoo import http
 from odoo.http import request
 from odoo.tools import datetime
+
+
+# from odoo.addons.auth_signup.controllers.main import AuthSignupHome
 
 
 class CustomHomeWebsite(http.Controller):
@@ -12,7 +16,8 @@ class CustomHomeWebsite(http.Controller):
         today_date = datetime.now().date()
         open_tenders = http.request.env['gntz.tenders'].search(
             [('state', '=', 'Published'), ('end_date', '>=', today_date)], order='create_date desc')
-        awarded_contract_tenders = http.request.env['gntz.tenders'].search([('state', '=', 'Contract Awarded')], order='create_date desc')
+        awarded_contract_tenders = http.request.env['gntz.tenders'].search([('state', '=', 'Contract Awarded')],
+                                                                           order='create_date desc')
         all_tender_states = ['Published', 'Bid Evaluation', 'Contract Awarded', 'Closed', 'Rejected', 'Canceled']
         all_posted_tenders = http.request.env['gntz.tenders'].search([('state', 'in', all_tender_states)],
                                                                      order='create_date '
@@ -32,28 +37,34 @@ class CustomHomeWebsite(http.Controller):
 
 
 class TenderWebsite(http.Controller):
-    @http.route(['/tenders'], type='http', auth="public", website=True)
-    def tenders_page(self):
+    @http.route(['/all/tenders'], type='http', auth="public", website=True)
+    def all_tenders_page(self):
         # Get today's date
         today_date = datetime.now().date()
         all_tender_states = ['Published', 'Bid Evaluation', 'Contract Awarded', 'Closed', 'reject', 'Canceled']
         all_posted_tenders = http.request.env['gntz.tenders'].search([('state', 'in', all_tender_states)],
                                                                      order='create_date '
                                                                            'desc')
-        tenders = http.request.env['gntz.tenders'].search([('state', '=', 'Published'), ('end_date', '>', today_date)],order='create_date desc')
+        tenders = http.request.env['gntz.tenders'].search([('state', '=', 'Published'), ('end_date', '>', today_date)],
+                                                          order='create_date desc')
 
-        return http.request.render('custom_procurement.tender_page', {'docs': all_posted_tenders})
-        # return http.request.render('custom_procurement.website_tender_template', {'docs': tenders})
+        return http.request.render('custom_procurement.all_tenders_page', {'docs': all_posted_tenders})
 
     @http.route(['/tenders/<model("gntz.tenders"):tender>'], type='http', auth="public",
                 website=True)
     def tender_detail(self, tender):
+        # tenders = request.env['gntz.tenders'].sudo().search([])
         return http.request.render('custom_procurement.website_tender_detail_template', {'doc': tender})
 
-    @http.route('/page/tenders', type='http', auth="public", website=True)
-    def tender_page(self, **kw):
-        tenders = request.env['gntz.tenders'].sudo().search([])
-        return http.request.render('custom_procurement.tender_page', {'docs': tenders})
+    @http.route('/open/tenders', type='http', auth="public", website=True)
+    def open_tenders_page(self, **kw):
+        tenders = request.env['gntz.tenders'].sudo().search([('state', '=', 'Published')])
+        return http.request.render('custom_procurement.open_tenders_page', {'docs': tenders})
+
+    @http.route('/awarded/tenders', type='http', auth="public", website=True)
+    def awarded_tenders_page(self, **kw):
+        tenders = request.env['gntz.tenders'].sudo().search([('state', '=', 'Contract Awarded')])
+        return http.request.render('custom_procurement.awarded_tenders_page', {'docs': tenders})
 
 
 class TenderApplicationController(http.Controller):
@@ -106,3 +117,25 @@ class TenderApplicationController(http.Controller):
 
         # Redirect to a success page or provide feedback to the user
         return http.request.redirect('/application_success')
+
+
+class AuthenticationCheckController(http.Controller):
+
+    @http.route('/portal_check_logged_in/is_logged_in', type='json', auth='user')
+    def check_authentication(self):
+        return {'logged_in': bool(request.env.user.id)}
+
+
+class CustomAuthSignupHome(AuthSignupHome):
+
+    @http.route(['/web/signup'], type='http', auth='public', website=True)
+    def web_signup(self, *args, **kw):
+        response = super().web_signup(*args, **kw)
+        # Process and save the custom fields data here
+        # values = {}
+        # if 'company_name' in kw:
+        #     values['company_name'] = kw.get('company_name')
+        # if 'register_license' in kw:
+        #     values['register_license'] = kw.get('register_license')
+        # request.env['res.partner'].sudo().create(values)
+        return response

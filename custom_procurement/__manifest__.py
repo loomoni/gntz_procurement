@@ -35,15 +35,16 @@
         'views/purchase_requisition.xml',
         'portal_views/website_menu.xml',
         'views/tenders_views.xml',
-        'portal_views/website_template.xml',
-        'portal_views/tender_detail_view.xml',
         'portal_views/application_form_template.xml',
         'views/evaluation_criteria_template.xml',
         'portal_views/tender_portal.xml',
         'portal_views/portal_home.xml',
+        'portal_views/tender_detail_view.xml',
+        'portal_views/custom_signup_view.xml',
     ],
     'js': [
             'static/src/js/website_tender_detail.js',  # Include your JS file here
+            'static/src/js/portal_check_logged_in.js',  # Include your JS file here
         ],
     'installable': True,
     'auto_install': False,

@@ -1,93 +1,279 @@
 <odoo>
-    <template id="tender_page" name="Tenders">
-        <link rel="stylesheet" type="text/css" href="/custom_tenders/static/src/css/custom_styles.css"/>
+    <!--    All Tenders -->
+    <template id="all_tenders_page" name="All Tenders">
         <link rel="stylesheet" type="text/css"
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
         <t t-call="website.layout">
-<!--            <t t-foreach="docs" t-as="doc">-->
-                <div class="container" style="width: 100%; margin-top: 10px; margin-bottom: 10px;">
-                    <div>
-                        <p style="text-align:left; color: black ; font-size: 16px; font-weight: 800;  padding: 8px; background-color: #f5f5f5;">
-                            All Tenders
-                        </p>
-                    </div>
-
-                    <!-- Search Section -->
-                    <div class="search-section"
-                         style="margin-bottom: 15px; display: flex; flex-direction: row;  justify-content: flex-end; align-items: center;">
-
-                        <!-- Tender Type Search Bar -->
-                        <div class="search-bar" style="margin-right: 10px; ">
-                            <select id="tender_type" name="tender_type"
-                                    style="padding: 8px; width: 300px;  background-color: white; border: 1px solid #ccc; border-radius: 5px;">
-                                <option value="">Select Tender Type</option>
-                                <option value="work">Work</option>
-                                <option value="goods">Goods</option>
-                                <option value="services">Services</option>
-                            </select>
-                        </div>
-
-                        <!-- Tender Branch Search Bar -->
-                        <div class="search-bar" style="margin-right: 10px;">
-                            <select id="branch" name="branch"
-                                    style="padding: 8px; width: 300px;  background-color: white; border: 1px solid #ccc; border-radius: 5px;">
-                                <option value="">Select Branch</option>
-                                <t t-foreach="branches" t-as="branch">
-                                    <option value="t t-esc='branch.id'">
-                                        <t t-esc="branch.name"/>
-                                    </option>
-                                </t>
-                            </select>
-                        </div>
-
-                        <!-- Apply Button -->
-                        <button class="btn btn-primary" type="submit">Apply Filters</button>
-                    </div>
-
-                    <table style="width: 100%; border-collapse: collapse;">
-                        <thead style="height: 20px">
-                            <tr style="padding: 14px 8px; color: #888;">
-                                <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Tender Name</th>
-                                <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Tender Ref No</th>
-                                <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Description</th>
-                                <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Tender Date</th>
-                                <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Closing Date</th>
-                                <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Status</th>
-                                <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr t-foreach="docs" t-as="doc">
-                                <td style="border: 1px solid #ddd; padding: 8px;">
-                                    <a style="color: #337ab7;" t-att-href="'/page/tenders/' + str(doc.id)">
-                                        <t t-esc="doc.name"/>
-                                    </a>
-                                </td>
-                                <td style="border: 1px solid #ddd; padding: 8px;">
-                                    <t t-esc="doc.tender_number"/>
-                                </td>
-                                <td style="border: 1px solid #ddd; padding: 8px;">
-                                    <p>
-                                        <t t-esc="doc.name"/>
-                                    </p>
-                                </td>
-                                <td style="border: 1px solid #ddd; padding: 8px;">
-                                     <t t-esc="doc.date"/>
-                                </td>
-                                <td style="border: 1px solid #ddd; padding: 8px;">
-                                    <t t-esc="doc.end_date"/>
-                                </td>
-                                <td style="border: 1px solid #ddd; padding: 8px;">
-                                    <t t-esc="doc.state"/>
-                                </td>
-                                <td style="border: 1px solid #ddd; font-weight:  700; font-size:16px; padding-bottom:0px;  text-align:center ">
-                                    <a style="color: 23b7e5;" t-att-href="'/page/tenders/' + str(doc.id)">View</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <!--            <t t-foreach="docs" t-as="doc">-->
+            <div class="container" style="width: 100%; margin-top: 10px; margin-bottom: 10px;">
+                <div>
+                    <p style="text-align:left; color: black ; font-size: 16px; font-weight: 800;  padding: 8px; background-color: #f5f5f5;">
+                        All Tenders
+                    </p>
                 </div>
-<!--            </t>-->
+
+
+                <!-- Search Section -->
+                <div class="search-section"
+                     style="margin-bottom: 15px; display: flex; flex-direction: row;  justify-content: flex-end; align-items: center;">
+
+                    <!-- Tender Type Search Bar -->
+                    <div class="search-bar" style="margin-right: 10px; ">
+                        <select id="tender_type" name="tender_type"
+                                style="padding: 8px; width: 300px;  background-color: white; border: 1px solid #ccc; border-radius: 5px;">
+                            <option value="">Select Tender Type</option>
+                            <option value="work">Work</option>
+                            <option value="goods">Goods</option>
+                            <option value="services">Services</option>
+                        </select>
+                    </div>
+
+                    <!-- Tender Branch Search Bar -->
+                    <div class="search-bar" style="margin-right: 10px;">
+                        <select id="branch" name="branch"
+                                style="padding: 8px; width: 300px;  background-color: white; border: 1px solid #ccc; border-radius: 5px;">
+                            <option value="">Select Branch</option>
+                            <t t-foreach="branches" t-as="branch">
+                                <option value="t t-esc='branch.id'">
+                                    <t t-esc="branch.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+
+                    <!-- Apply Button -->
+                    <button class="btn btn-primary" type="submit">Apply Filters</button>
+                </div>
+
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead style="height: 20px">
+                        <tr style="padding: 14px 8px; color: #888;">
+                            <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Tender Name</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Tender Ref No</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Description</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Tender Date</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Closing Date</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Status</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="docs" t-as="doc">
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <a style="color: #337ab7;" t-att-href="'/tenders/' + str(doc.id)">
+                                    <t t-esc="doc.name"/>
+                                </a>
+                            </td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <t t-esc="doc.tender_number"/>
+                            </td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <p>
+                                    <t t-esc="doc.name"/>
+                                </p>
+                            </td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <t t-esc="doc.date"/>
+                            </td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <t t-esc="doc.end_date"/>
+                            </td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <t t-esc="doc.state"/>
+                            </td>
+                            <td style="border: 1px solid #ddd; font-weight:  700; font-size:16px; padding-bottom:0px;  text-align:center ">
+                                <a style="color: 23b7e5;" t-att-href="'/tenders/' + str(doc.id)">View</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--            </t>-->
+        </t>
+    </template>
+
+    <!--    Open Tenders -->
+
+    <template id="open_tenders_page" name="Open Tenders">
+        <link rel="stylesheet" type="text/css"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+        <t t-call="website.layout">
+            <!--            <t t-foreach="docs" t-as="doc">-->
+            <div class="container" style="width: 100%; margin-top: 10px; margin-bottom: 10px;">
+                <div>
+                    <p style="text-align:left; color: black ; font-size: 16px; font-weight: 800;  padding: 8px; background-color: #f5f5f5;">
+                        Open Tenders
+                    </p>
+                </div>
+
+                <!-- Search Section -->
+                <div class="search-section"
+                     style="margin-bottom: 15px; display: flex; flex-direction: row;  justify-content: flex-end; align-items: center;">
+
+                    <!-- Tender Type Search Bar -->
+                    <div class="search-bar" style="margin-right: 10px; ">
+                        <select id="tender_type" name="tender_type"
+                                style="padding: 8px; width: 300px;  background-color: white; border: 1px solid #ccc; border-radius: 5px;">
+                            <option value="">Select Tender Type</option>
+                            <option value="work">Work</option>
+                            <option value="goods">Goods</option>
+                            <option value="services">Services</option>
+                        </select>
+                    </div>
+
+                    <!-- Tender Branch Search Bar -->
+                    <div class="search-bar" style="margin-right: 10px;">
+                        <select id="branch" name="branch"
+                                style="padding: 8px; width: 300px;  background-color: white; border: 1px solid #ccc; border-radius: 5px;">
+                            <option value="">Select Branch</option>
+                            <t t-foreach="branches" t-as="branch">
+                                <option value="t t-esc='branch.id'">
+                                    <t t-esc="branch.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+
+                    <!-- Apply Button -->
+                    <button class="btn btn-primary" type="submit">Apply Filters</button>
+                </div>
+
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead style="height: 20px">
+                        <tr style="padding: 14px 8px; color: #888;">
+                            <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Tender Name</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Tender Ref No</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Description</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Tender Date</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Closing Date</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Status</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="docs" t-as="doc">
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <a style="color: #337ab7;" t-att-href="'/tenders/' + str(doc.id)">
+                                    <t t-esc="doc.name"/>
+                                </a>
+                            </td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <t t-esc="doc.tender_number"/>
+                            </td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <p>
+                                    <t t-esc="doc.name"/>
+                                </p>
+                            </td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <t t-esc="doc.date"/>
+                            </td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <t t-esc="doc.end_date"/>
+                            </td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <t t-esc="doc.state"/>
+                            </td>
+                            <td style="border: 1px solid #ddd; font-weight:  700; font-size:16px; padding-bottom:0px;  text-align:center ">
+                                <a style="color: 23b7e5;" t-att-href="'/tenders/' + str(doc.id)">View</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--            </t>-->
+        </t>
+    </template>
+
+    <!--    Awarded Tenders -->
+    <template id="awarded_tenders_page" name="Awarded Tenders">
+        <link rel="stylesheet" type="text/css"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+        <t t-call="website.layout">
+            <!--            <t t-foreach="docs" t-as="doc">-->
+            <div class="container" style="width: 100%; margin-top: 10px; margin-bottom: 10px;">
+                <div>
+                    <p style="text-align:left; color: black ; font-size: 16px; font-weight: 800;  padding: 8px; background-color: #f5f5f5;">
+                        Awarded Tenders
+                    </p>
+                </div>
+
+                <!-- Search Section -->
+                <div class="search-section"
+                     style="margin-bottom: 15px; display: flex; flex-direction: row;  justify-content: flex-end; align-items: center;">
+
+                    <!-- Tender Type Search Bar -->
+                    <div class="search-bar" style="margin-right: 10px; ">
+                        <select id="tender_type" name="tender_type"
+                                style="padding: 8px; width: 300px;  background-color: white; border: 1px solid #ccc; border-radius: 5px;">
+                            <option value="">Select Tender Type</option>
+                            <option value="work">Work</option>
+                            <option value="goods">Goods</option>
+                            <option value="services">Services</option>
+                        </select>
+                    </div>
+
+                    <!-- Tender Branch Search Bar -->
+                    <div class="search-bar" style="margin-right: 10px;">
+                        <select id="branch" name="branch"
+                                style="padding: 8px; width: 300px;  background-color: white; border: 1px solid #ccc; border-radius: 5px;">
+                            <option value="">Select Branch</option>
+                            <t t-foreach="branches" t-as="branch">
+                                <option value="t t-esc='branch.id'">
+                                    <t t-esc="branch.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+
+                    <!-- Apply Button -->
+                    <button class="btn btn-primary" type="submit">Apply Filters</button>
+                </div>
+
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead style="height: 20px">
+                        <tr style="padding: 14px 8px; color: #888;">
+                            <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Tender Name</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Tender Ref No</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Description</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Tender Date</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Closing Date</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Status</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; height: 50px;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="docs" t-as="doc">
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <a style="color: #337ab7;" t-att-href="'/tenders/' + str(doc.id)">
+                                    <t t-esc="doc.name"/>
+                                </a>
+                            </td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <t t-esc="doc.tender_number"/>
+                            </td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <p>
+                                    <t t-esc="doc.name"/>
+                                </p>
+                            </td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <t t-esc="doc.date"/>
+                            </td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <t t-esc="doc.end_date"/>
+                            </td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <t t-esc="doc.state"/>
+                            </td>
+                            <td style="border: 1px solid #ddd; font-weight:  700; font-size:16px; padding-bottom:0px;  text-align:center ">
+                                <a style="color: 23b7e5;" t-att-href="'/tenders/' + str(doc.id)">View</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--            </t>-->
         </t>
     </template>
 </odoo>

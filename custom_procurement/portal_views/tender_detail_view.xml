@@ -2,6 +2,7 @@
     <data>
         <template id="website_tender_detail_template" name="Tender Detail">
             <script type="text/javascript" src="/custom_procurement/static/src/js/website_tender_detail.js"></script>
+            <script type="text/javascript" src="custom_procurement/static/src/js/portal_check_logged_in.js"></script>
             <t t-call="website.layout">
                 <div class="container">
                     <div class="row mt-4">
@@ -11,13 +12,14 @@
                                     <t t-esc="doc.name"/>
                                 </h3>
                                 <div t-raw="doc.description"/>
-
                                 <div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
-                                    <a t-attf-href="/apply-tender?doc_id={{doc.id}}" class="btn btn-primary"
+                                    <a id="apply-button" class="btn btn-primary"
+                                       href="/web/login?redirect=/apply-tender?doc_id={{doc.id}}"
                                        style="padding: 10px 20px; font-size: 16px;">
                                         Click to Apply
                                     </a>
                                 </div>
+
 
                             </div>
                         </div>

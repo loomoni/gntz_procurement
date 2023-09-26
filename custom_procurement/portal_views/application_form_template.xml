@@ -4,39 +4,99 @@
         <t t-call="website.layout">
             <div class="container">
                 <div class="row mt-4">
-                    <div class="col-md-6 offset-md-3" style="margin-bottom: 20px;">
+                    <div class="col-md-12" style="margin-bottom: 20px;">
                         <form method="post" action="/submit_application" enctype="multipart/form-data"
                               class="rounded p-4" style="background-color: #f8f9fa;">
-                            <h2 class="text-center mb-4" style="color: #333;">Apply for Tender</h2>
+                            <h2 class="text-center mb-4"
+                                style="color: #89A130; font-size: 30px; text-align: center; overflow: hidden;">
+                                <span style="white-space: nowrap; overflow: hidden; display: inline-block; animation: typing-animation 8s steps(40) forwards;"
+                                      class="typing">
+                                    Apply for Tender
+                                </span>
+                            </h2>
+
+                            <style>
+                                .typing {
+                                animation: typing-animation 4s steps(40) forwards;
+                                }
+
+                                @keyframes typing-animation {
+                                0% {
+                                width: 0;
+                                }
+                                100% {
+                                width: 100%;
+                                }
+                                }
+                            </style>
+
+
                             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                             <input type="hidden" name="tender_id" t-att-value="request.params.get('doc_id')"/>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Name:</label>
-                                <input type="text" name="name" class="form-control" required="required"/>
+
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" name="name" class="form-control" required="required"/>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" name="email" class="form-control" required="required"/>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email:</label>
-                                <input type="email" name="email" class="form-control" required="required"/>
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label for="phone" class="form-label">Phone</label>
+                                    <input type="text" name="phone" class="form-control" required="required"/>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="company" class="form-label">Company</label>
+                                    <input type="text" name="company" class="form-control"/>
+                                </div>
                             </div>
+                            <!-- Attach Eligibility Documents  Section-->
                             <div class="mb-3">
-                                <label for="phone" class="form-label">Phone:</label>
-                                <input type="text" name="phone" class="form-control" required="required"/>
-                            </div>
-                            <div class="mb-3">
-                                <label for="company" class="form-label">Company:</label>
-                                <input type="text" name="company" class="form-control"/>
-                            </div>
-                            <div class="mb-3">
-                                <label for="attachment" class="form-label">Attachment:</label>
+                                <label for="attachment" class="form-label">Company Profile</label>
                                 <input type="file" name="attachment" class="form-control"/>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block">Submit Application</button>
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label for="attachment" class="form-label">Business Licence</label>
+                                    <input type="file" name="attachment" class="form-control"/>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="attachment" class="form-label">TIN $ Certificate of registration
+                                    </label>
+                                    <input type="file" name="attachment" class="form-control"/>
+                                </div>
+                            </div>
+                            <!--Proposal Attachment-->
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label for="attachment" class="form-label">Technical proposal</label>
+                                    <input type="file" name="attachment" class="form-control"/>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="attachment" class="form-label">Financial Proposal</label>
+                                    <input type="file" name="attachment" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 offset-md-3" style="overflow: hidden;">
+                                    <button type="submit" class="btn btn-primary btn-block"
+                                            style="display: block; transition: transform 2s ease;"
+                                            onmouseover="this.style.transform='scaleX(1.5)'; setTimeout(() => { this.style.transform='scaleX(1)'; }, 2000);">
+                                        Submit Application
+                                    </button>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </t>
     </template>
+
 
     <record id="application_success" model="website.page">
         <field name="name">Thanks</field>
