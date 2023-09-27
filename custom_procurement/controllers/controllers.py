@@ -123,11 +123,19 @@ class TenderWebsite(http.Controller):
         branches = request.env['hr.branches'].sudo().search([])
         return http.request.render('custom_procurement.awarded_tenders_page', {'docs': tenders, 'branches': branches})
 
+    @http.route('/registration', type='http', auth="public", website=True)
+    def tender_application_form(self, **kw, ):
+        # Render the application form page
+        # tender_id = kw.get('tender_id')
+        # Get the tender record based on the ID
+        # tender = http.request.env['gntz.tenders'].browse(int(tender_id))
+        return http.request.render('custom_procurement.applicants_register_form')
+
 
 class TenderApplicationController(http.Controller):
 
     @http.route('/apply-tender', type='http', auth="public", website=True)
-    def tender_application_form(self, **kw,):
+    def tender_application_form(self, **kw, ):
         # Render the application form page
         # tender_id = kw.get('tender_id')
         # Get the tender record based on the ID
@@ -152,7 +160,8 @@ class TenderApplicationController(http.Controller):
         attachment_data = base64.b64encode(attachment.read()) if attachment else None
 
         # Handle business license attachment
-        business_licence_attachment_data = base64.b64encode(business_licence_attachment.read()) if business_licence_attachment else None
+        business_licence_attachment_data = base64.b64encode(
+            business_licence_attachment.read()) if business_licence_attachment else None
 
         # Save the attachment and other data to your model (tenders.applicants)
         applicants_model = request.env['tenders.applicants']

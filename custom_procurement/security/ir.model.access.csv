@@ -41,3 +41,11 @@ access_evaluation_criteria_template_line,Procurement gntz evaluation criteria te
 
 access_tender_evaluation_criteria_line,Procurement gntz tender evaluation criteria line Group,model_tender_evaluation_criteria_line,,1,1,1,1
 
+access_tender_applicant_scores_committe_access, Procurement gntz pc tender score criteria line Group,model_applicant_scores,procurement_pc,1,1,1,1
+access_tender_applicant_scores_manager_access, Procurement gntz manager tender score criteria line Group,model_applicant_scores,procurement_manager,1,1,1,1
+access_tender_applicant_scores_ad_manager, Procurement gntz ad tender score criteria line Group,model_applicant_scores,procurement_ad_manager,1,1,1,1
+
+access_tender_applicant_scores_lines_pc, Procurement gntz tender pc score line criteria line Group,model_applicant_scores_lines,procurement_pc,1,1,1,1
+access_tender_applicant_scores_lines_manager, Procurement gntz tender manager score line criteria line Group,model_applicant_scores_lines,procurement_manager,1,1,1,1
+access_tender_applicant_scores_lines_ad, Procurement gntz tender ad score line criteria line Group,model_applicant_scores_lines,procurement_ad_manager,1,1,1,1
+
